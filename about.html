@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About - Crust&Crave</title>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Fredoka:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer theme {
+      :root {
+        --primary-color: #F59E0B;
+        --secondary-color: #D97706;
+        --bg-light: #FFFBEB;
+        --text-dark: #78350F;
+      }
+    }
+    @layer base {
+      body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); }
+      h1, h2, h3 { font-family: 'Fredoka', cursive; }
+    }
+  </style>
+</head>
+<body class="bg-[var(--bg-light)]">
+  <div id="root"></div>
+  <script type="text/babel" src="components/Header.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
+  <script type="text/babel">
+
+function AboutPage() {
+  return (
+    <div>
+      <Header />
+      <section className="bg-gradient-to-r from-amber-400 to-yellow-500 text-center py-16 text-white">
+        <h1 className="text-5xl font-bold mb-4">About Crust&Crave</h1>
+        <p className="text-lg">Where Ever Bite is a Delight.</p>
+      </section>
+      <main className="max-w-4xl mx-auto py-16 px-6 text-gray-700">
+        <div className="bg-white rounded-3xl shadow-lg p-8 space-y-6">
+          <p>Crust & Crave is a small bakery that loves making sweet and tasty treats. Our special product is the Jackfruit Macapuno Pie, made with fresh jackfruit, creamy macapuno, and a golden, flaky crust.</p>
+        <p>Every pie is baked with love to give you the perfect mix of flavor and sweetness. We believe that good food makes people happy and at Crust & Crave, we’re here to satisfy your cravings ỉn every slice.
+Crust made with care, cravings fulfilled.</p>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<AboutPage />);
+  </script>
+</body>
+</html>

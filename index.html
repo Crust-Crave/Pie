@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crust & Crave - Home</title>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Fredoka:wght@700&family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer theme {
+      :root {
+        --primary-color: #F59E0B;
+        --secondary-color: #D97706;
+        --bg-light: #FFFBEB;
+        --text-dark: #78350F;
+      }
+    }
+    @layer base {
+      body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); }
+      h1, h2, h3 { font-family: 'Fredoka', cursive; }
+      .cursive { font-family: 'Great Vibes', cursive; }
+    }
+  </style>
+</head>
+<body class="bg-[var(--bg-light)]">
+  <div id="root"></div>
+  <script type="text/babel" src="components/Header.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
+  <script type="text/babel">
+
+  const { useState } = React;
+
+  function HomePage() {
+    const [showModal, setShowModal] = useState(false);
+
+    return (
+      <div>
+        <Header />
+
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-amber-400 to-yellow-500 text-center py-10 text-maroon relative overflow-hidden">
+          <div className="flex flex-col items-center justify-center space-y-2 animate-fadeIn">
+            <div className="flex items-center justify-center space-x-4 animate-fadeInUp">
+              <img 
+                src="mypie.png" 
+                alt="Crust & Crave Logo" 
+                className="w-32 md:w-44 drop-shadow-[0_6px_18px_rgba(120,53,15,0.5)] animate-fadeInUpDelay"
+              />
+              <h1 className="text-6xl font-bold animate-fadeInUpDelay">Crust & Crave</h1>
+            </div>
+            <p className="text-2xl cursive max-w-2xl mx-auto animate-fadeInUpDelay2 mt-2">
+              Where every flavor tells a story — crafted with passion, inspired by tradition, and made to bring people together.
+            </p>
+          </div>
+        </section>
+
+        {/* About Business Section */}
+        <main className="py-16 px-6 text-center max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold text-[var(--text-dark)] mb-6">About Our Business</h2>
+          <p className="text-gray-700 text-lg leading-relaxed mb-8">
+            At <span className="text-[var(--primary-color)] font-semibold">Crust & Crave</span>, we blend creativity and craftsmanship to create unforgettable culinary experiences. 
+            Every product we make is a celebration of flavor, culture, and community a golden harmony that brings joy to every bite. 
+            From our humble beginnings to our thriving kitchen today, our passion remains the same to make moments deliciously memorable.
+          </p>
+          <button 
+            onClick={() => setShowModal(true)} 
+            className="btn-primary px-8 py-3 text-lg font-semibold rounded-full hover:bg-[var(--secondary-color)] transform transition hover:scale-105"
+          >
+            Our Mission
+          </button>
+        </main>
+
+        {/* Modal */}
+        {showModal && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 animate-fadeIn"
+            onClick={() => setShowModal(false)}
+          >
+            <div 
+              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full p-10 text-left animate-fadeIn relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setShowModal(false)} 
+                className="absolute top-4 right-6 text-gray-500 text-2xl font-bold hover:text-gray-800 transition"
+              >
+                &times;
+              </button>
+
+              <h2 className="text-3xl font-bold text-[var(--text-dark)] mb-4">Our Mission</h2>
+              <p className="text-gray-700 mb-6">
+                At <strong>Crust & Crave</strong>, we aim to delight every customer with freshly baked and fried Filipino desserts made from high-quality local ingredients. 
+                We are committed to sharing the comforting taste of home through our signature Jackfruit Macapuno Pie.
+              </p>
+
+              <h2 className="text-3xl font-bold text-[var(--text-dark)] mb-4">Our Vision</h2>
+              <p className="text-gray-700 mb-6">
+                To be a trusted and well-loved Filipino dessert brand recognized for our creativity, quality, and passion in crafting unique treats that bring joy to every household.
+              </p>
+
+              <h2 className="text-3xl font-bold text-[var(--text-dark)] mb-4">Our Core Values</h2>
+              <ul className="list-disc list-inside text-gray-700 space-y-2">
+                <li><strong>Quality</strong> – We ensure excellence in every product we make.</li>
+                <li><strong>Innovation</strong> – We continuously create new ways to enjoy Filipino desserts.</li>
+                <li><strong>Customer Satisfaction</strong> – We put our customers at the heart of everything we do.</li>
+                <li><strong>Teamwork</strong> – We grow together through respect, cooperation, and shared goals.</li>
+                <li><strong>Integrity</strong> – We stay true to our word and uphold honesty in our business.</li>
+              </ul>
+            </div>
+          </div>
+        )}
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // Animations
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fadeIn { animation: fadeIn 0.6s ease-in-out; }
+    .animate-fadeInUp { animation: fadeInUp 0.8s ease-out; }
+    .animate-fadeInUpDelay { animation: fadeInUp 1s ease-out 0.3s both; }
+    .animate-fadeInUpDelay2 { animation: fadeInUp 1.2s ease-out 0.6s both; }
+  `;
+  document.head.appendChild(style);
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<HomePage />);
+  </script>
+</body>
+</html>

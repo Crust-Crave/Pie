@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products - Golden Bites</title>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Fredoka:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style type="text/tailwindcss">
+    @layer theme {
+      :root {
+        --primary-color: #F59E0B;
+        --secondary-color: #D97706;
+        --bg-light: #FFFBEB;
+        --text-dark: #78350F;
+      }
+    }
+    @layer base {
+      body { font-family: 'Poppins', sans-serif; background-color: var(--bg-light); }
+      h1, h2, h3 { font-family: 'Fredoka', cursive; }
+    }
+  </style>
+</head>
+<body class="bg-[var(--bg-light)]">
+  <div id="root"></div>
+  <script type="text/babel" src="components/Header.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
+  <script type="text/babel">
+
+  const { useState } = React;
+
+  function ProductsPage() {
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const products = [
+      { 
+        name: "Golden Honey Delight", 
+        price: "$24.99", 
+        desc: "Pure organic honey infused with natural golden essence.", 
+        ingredients: "Raw honey, golden essence, organic sugar.",
+        img: "https://picsum.photos/400/300?random=1" 
+      },
+      { 
+        name: "Amber Crust Bread", 
+        price: "$14.99", 
+        desc: "Artisan bread baked with love and care.", 
+        ingredients: "Whole wheat, yeast, sea salt, amber glaze.",
+        img: "https://picsum.photos/400/300?random=2" 
+      },
+      
+    ];
+
+    return (
+      <div>
+        <Header />
+
+        <section className="bg-gradient-to-r from-amber-400 to-yellow-500 text-center py-16 text-white">
+          <h1 className="text-5xl font-bold mb-4">Our Featured Products</h1>
+          <p className="text-lg">Crafted with passion, baked with perfection.</p>
+        </section>
+
+        <main className="py-16 px-6 grid md:grid-cols-3 sm:grid-cols-1 gap-8 max-w-6xl mx-auto">
+          {products.map((p, i) => (
+            <div 
+              key={i} 
+              className="bg-white rounded-3xl shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <img src={p.img} alt={p.name} className="w-full h-56 object-cover" />
+              <div className="p-6 text-left">
+                <h2 className="text-2xl font-bold text-[var(--text-dark)]">{p.name}</h2>
+                <p className="text-gray-600 my-2">{p.desc}</p>
+                <p className="text-lg font-semibold text-[var(--primary-color)]">{p.price}</p>
+                <button 
+                  onClick={() => setSelectedProduct(p)} 
+                  className="btn-primary mt-4 transform transition duration-300 hover:scale-105 hover:bg-[var(--secondary-color)]"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          ))}
+        </main>
+
+        {selectedProduct && (
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 animate-fadeIn"
+            onClick={() => setSelectedProduct(null)}
+          >
+            <div 
+              className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 relative animate-fadeIn"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setSelectedProduct(null)} 
+                className="absolute top-3 right-4 text-gray-500 text-2xl font-bold hover:text-gray-800 transition"
+              >
+                &times;
+              </button>
+              <img src={selectedProduct.img} alt={selectedProduct.name} className="rounded-2xl mb-4 w-full h-56 object-cover" />
+              <h2 className="text-3xl font-bold text-[var(--text-dark)] mb-2">{selectedProduct.name}</h2>
+              <p className="text-gray-600 mb-2">{selectedProduct.desc}</p>
+              <p className="text-sm text-gray-500 mb-4"><strong>Ingredients:</strong> {selectedProduct.ingredients}</p>
+              <div className="flex justify-between items-center">
+                <p className="text-lg font-semibold text-[var(--primary-color)]">{selectedProduct.price}</p>
+                <a href="https://web.facebook.com/profile.php?id=61566639032925" className="btn-primary px-6 py-3 rounded-full hover:bg-[var(--secondary-color)] transition">Buy Now</a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <Footer />
+      </div>
+    );
+  }
+
+  // Add fade animation
+  const style = document.createElement('style');
+  style.innerHTML = `
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+  `;
+  document.head.appendChild(style);
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<ProductsPage />);
+  </script>
+</body>
+</html>

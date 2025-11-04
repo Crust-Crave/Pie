@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crust & Crave - Connect With Us</title>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react@18/umd/react.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://resource.trickle.so/vendor_lib/unpkg/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Fredoka:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style type="text/tailwindcss">
+    @layer base {
+      body { font-family: 'Poppins', sans-serif; background-color: #FFFBEB; color: #000000; }
+      h1, h2 { font-family: 'Fredoka', cursive; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="components/Header.js"></script>
+  <script type="text/babel" src="components/Footer.js"></script>
+  <script type="text/babel">
+
+  function SocialsPage() {
+    const socials = [
+      {
+        id: 1,
+        name: "Facebook",
+        image: "fb.png", // add local image (e.g. 'images/facebook.png')
+        description: "Follow us on Facebook for the latest updates and sweet creations.",
+        link: "https://web.facebook.com/people/Crust-and-Crave/61566639032925/"
+      },
+      {
+        id: 2,
+        name: "Instagram",
+        image: "ins.jpg", // add local image (e.g. 'images/instagram.png')
+        description: "See behind-the-scenes and drool-worthy treats on our Instagram feed!",
+        link: "https://www.instagram.com/ccrave_05?igsh=dGE1aHY4MjVsaG9k"
+      },
+      {
+        id: 3,
+        name: "TikTok",
+        image: "tik.png", // add local image (e.g. 'images/tiktok.png')
+        description: "Catch our fun and delicious moments on TikTok. Follow for more Exciting videos!",
+        link: "https://www.tiktok.com/@crust.crave?_r=1&_t=ZS-910Zx5nfO1A%20target="
+      }
+    ];
+
+    return (
+      <div>
+        <Header />
+        <section className="bg-gradient-to-r from-amber-400 to-yellow-500 text-center py-16 text-white">
+          <h1 className="text-5xl font-bold mb-4">Connect With Us</h1>
+          <p className="text-lg">Follow Crust & Crave across your favorite platforms</p>
+        </section>
+
+        <main className="flex justify-center gap-8 flex-wrap py-16 px-6">
+          {socials.map((s) => (
+            <div key={s.id} className="bg-white rounded-2xl shadow-md p-6 max-w-xs text-center transform transition hover:-translate-y-2 hover:shadow-2xl">
+              <img src={s.image} alt={s.name} className="rounded-full mx-auto mb-4 w-32 h-32 object-contain border-4 border-amber-400 bg-white" />
+              <h2 className="text-2xl font-bold mb-2 text-amber-600">{s.name}</h2>
+              <p className="text-gray-600 mb-4">{s.description}</p>
+              <a href={s.link} target="_blank" className="bg-amber-500 text-white px-6 py-2 rounded-full hover:bg-amber-600 transition font-semibold inline-block">
+                Visit {s.name}
+              </a>
+            </div>
+          ))}
+        </main>
+
+        <Footer />
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(<SocialsPage />);
+  </script>
+</body>
+</html>
